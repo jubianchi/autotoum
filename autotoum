@@ -1,5 +1,6 @@
 #!/bin/bash
 
+IFS=":"
 PIPE=/tmp/autotoum_$$
 ATOUM=bin/atoum
 SOURCES="$(pwd)/src $(pwd)/tests/units"
@@ -107,6 +108,7 @@ do
             ATOUM=$OPTARG
             ;;
         w)
+            IFS=' ';
             SOURCES=$(echo $OPTARG | sed "s/,/ /g")
             for entry in $SOURCES
             do
@@ -116,6 +118,7 @@ do
                     exit 1
                 fi
             done
+            IFS=':';
             ;;
         ?)
             usage
